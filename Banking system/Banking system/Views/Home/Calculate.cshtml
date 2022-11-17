@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "login";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h1 style="text-align:center">Онлайн расчет ежемеячной оплаты</h1>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group" style="text-align:center">
+        <h1>Укажите процентную ставку</h1>
+        @Html.TextBox("Percent", "", new { @class = "form-group", type = "number"})
+    </div>
+    <div class="form-group" style="text-align:center">
+        <h1>Укажите период</h1>
+        @Html.TextBox("Period", "", new { @class = "form-group", type = "number" })
+    </div>
+
+    <div class="form-group" style="text-align:center">
+        <h1>Укажите сумму кредита</h1>
+        @Html.TextBox("Summ", "", new { @class = "form-group", type = "number" })
+    </div>
+
+
+
+    <div class="form-group">
+        <div style="text-align:center">
+            <input type="submit" value="Расчитать" class="btn btn-default" style="font-size:40px  " />
+        </div>
+    </div>
+
+
+}
+    @{
+    
+        if (TempData["result"] != null)
+        {
+            <div class="form-group" style="text-align:center">
+                <label style="text-align:center; font-size:50px">@TempData["result"]</label>
+            </div>
+        }
+    }
+   

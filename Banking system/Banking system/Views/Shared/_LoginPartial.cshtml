@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+
+<ul class="nav navbar-nav navbar-right">
+    
+    @{
+        try
+        {
+            if (Session["Userid"] != null)
+            {
+                <li>@Html.ActionLink($"{Session["Userid"]}", "Login", "Accounts", routeValues: null, htmlAttributes: new { id = "ProfileLink" })</li>
+                <li>@Html.ActionLink("Выйти", "Logout", "Accounts", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink("Регистрация", "Register", "Accounts", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Войти", "Login", "Accounts", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            }
+
+
+        }
+        catch { }
+    }
+</ul>
+
