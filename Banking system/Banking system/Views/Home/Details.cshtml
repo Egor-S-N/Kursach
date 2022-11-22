@@ -1,0 +1,104 @@
+﻿@model Banking_system.Models.Requests
+@using Banking_system.Models
+
+@{
+    
+    CreditTypes creditTypes = ViewData["credittype"] as CreditTypes;
+}
+<title>Детали заявки</title>
+<h2>Детали заявки</h2>
+
+<div>
+    <dl class="dl-horizontal">
+
+
+
+
+
+
+        @{
+            Clients clients = ViewData["clients"] as Clients;
+            if ((string)Session["Usertype"] == "Admin" || (string)Session["Usertype"] == "Manager")
+            {
+
+
+
+                <dd>
+                    ФИО: @clients.Name @clients.Surname @clients.Patronymic
+                </dd>
+
+                <dd>
+                    Зарплата: @clients.Salary.ToString("C")
+                </dd>
+                <dd>
+                    Телефон: +@clients.Phone
+                </dd>
+                <dd>
+                    @{ byte[] photo = clients.Photo;
+                        string imageSrc = null;
+                        if (photo != null)
+                        {
+                            MemoryStream ms = new MemoryStream();
+                            ms.Write(photo, 0, photo.Length);
+                            string imageBase64 = Convert.ToBase64String(ms.ToArray());
+                            imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                            string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+                        }
+                    }
+
+                    Фотография: <img src="@imageSrc" alt="Image" width="150" height="100" />
+
+                </dd>
+
+
+            }
+
+        }
+
+
+
+
+
+
+        <dt>
+            @Html.DisplayName("Данные кредита: ")
+        </dt>
+
+        <dd>
+            Назвавние: @creditTypes.Name 
+        </dd>
+        <dd>
+            Процент: @creditTypes.Percent %
+        </dd>
+        <dd>
+            Период(в месяцах): @creditTypes.MonthPeriod
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Статус: ")
+        </dt>
+
+
+        @if(Model.Result == true)
+            {
+            <dd>Одобрено</dd>
+            }
+            else
+            {
+                <dd>Не одобрено</dd>
+            }
+        
+
+        
+
+
+
+
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Вернуться назад", "Requests")
+</p>

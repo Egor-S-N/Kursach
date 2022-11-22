@@ -14,9 +14,21 @@ namespace Banking_system.Models
     
     public partial class Accounts
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Accounts()
+        {
+            this.Clients = new HashSet<Clients>();
+            this.Workers = new HashSet<Workers>();
+        }
+    
         public int id { get; set; }
         public string username { get; set; }
         public string pasword { get; set; }
         public string accout_type { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Clients> Clients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Workers> Workers { get; set; }
     }
 }

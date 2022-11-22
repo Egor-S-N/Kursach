@@ -1,0 +1,57 @@
+﻿@model Banking_system.Models.Requests
+@using Banking_system.Models
+
+@{
+    ViewBag.Title = "Approve";
+    BankDBEntities db = new BankDBEntities();
+    Clients client = ViewData["client"] as Clients;
+    CreditTypes creditType = ViewData["credit_type"] as CreditTypes;
+}
+<title>Одобрение заявки</title>
+<h2>Одобрить заявку</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Requests</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.Label("Тип кредита", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @creditType.Name
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Клиент", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @client.Name @client.Surname @client.Patronymic
+                @*@Html.EditorFor(model => model.Id_client, new { htmlAttributes = new { @class = "form-control" } })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Статус", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    Не одобрено
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Одобрить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

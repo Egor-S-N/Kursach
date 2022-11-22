@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Banking_system.Models.Credits>
+@using Banking_system.Models
+
+@{
+    ViewBag.Title = "Index";
+    BankDBEntities db = new BankDBEntities();
+    var workers = from s in db.Workers select s;
+
+}
+<title>Кредиты</title>
+<h2>Кредиты</h2>
+
+
+<table class="table">
+    <tr>
+        @if ((string)Session["Usertype"] != "Manager")
+            {
+        <th>
+            @Html.DisplayName("Сотрудник")
+        </th>
+            }
+
+        <th>
+            @Html.DisplayName("Заявка")
+        </th>
+        <th>
+            @Html.DisplayName("Сумма кредита")
+        </th>
+        <th>
+            @Html.DisplayName("Дата выдачи")
+        </th>
+
+        <th>
+            Действия
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @if ((string)Session["Usertype"] != "Manager")
+        {
+            foreach(var worker in workers)
+            {
+                if(item.Id_worker == worker.Id)
+                        {
+                    <td>
+                        @worker.Name @worker.Surname @worker.Patronymic
+                    </td>
+                        }
+            }
+
+
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Id_worker)
+            </td>*@
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_request)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Credit_sum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_of_issue)
+        </td>
+
+        @if ((string)Session["Usertype"] == "Client" | (string)Session["Usertype"] == "Manager")
+        {
+            <td>
+                @Html.ActionLink("Детали", "Details", new { id = item.Id })
+            </td>
+        }
+        else if ((string)Session["Usertype"] == "Admin")
+        {
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        }
+    </tr>
+}
+
+</table>

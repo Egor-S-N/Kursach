@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная страница</title>
+   
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -32,16 +32,31 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                     <li>@Html.ActionLink("Информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Расчет оплаты", "Calculate", "Home")</li>
+                    <li>@Html.ActionLink("Виды кредитов", "Index","CreditTypes")</li>
+
+                    @{ 
+                        if (Session["Usertype"]!= null)
+            {
+
+                        <li>@Html.ActionLink("Просмотр заявок", "Requests", "Home")</li>
+                        <li>@Html.ActionLink("Кредиты","Index", "Credits")</li>
+            }
+                    }
+                    
+
 
                     @{
-                        if ((string)Session["Userid"] == "Admin")
+                        if ((string)Session["Usertype"] == "Admin" | (string)Session["Usertype"] == "Manager")
                         {
 
                             <li>@Html.ActionLink("Клиенты", "Index", "Clients")</li>
+                        }
+
+                        if ((string)Session["Usertype"] == "Admin")
+                        {
+                            <li>@Html.ActionLink("Сотрудники", "Index", "Workers")</li>
                         }
                     }
 

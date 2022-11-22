@@ -295,7 +295,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\CreditsController.cs" />
+    <Compile Include="Controllers\CreditTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WorkersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -326,6 +329,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Register.cs" />
     <Compile Include="Models\Requests.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -349,7 +353,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\bg.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -384,10 +388,24 @@
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Accounts\Register.cshtml" />
     <Content Include="Views\Home\Calculate.cshtml" />
+    <Content Include="Views\Accounts\Profile.cshtml" />
+    <Content Include="Views\Home\Requests.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Home\Approve.cshtml" />
+    <Content Include="Views\Credits\Index.cshtml" />
+    <Content Include="Views\Credits\Details.cshtml" />
+    <Content Include="Views\Credits\Delete.cshtml" />
+    <Content Include="Views\Credits\Edit.cshtml" />
+    <Content Include="Views\CreditTypes\Index.cshtml" />
+    <Content Include="Views\CreditTypes\Create.cshtml" />
+    <Content Include="Views\CreditTypes\Delete.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>_LoginPartial.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Home\styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -400,13 +418,16 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Clients\Create.cshtml" />
     <Content Include="Views\Clients\Delete.cshtml" />
     <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Workers\Index.cshtml" />
+    <Content Include="Views\Workers\Details.cshtml" />
+    <Content Include="Views\Workers\Delete.cshtml" />
+    <Content Include="Views\Workers\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

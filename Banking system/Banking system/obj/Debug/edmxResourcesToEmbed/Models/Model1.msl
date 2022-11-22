@@ -21,6 +21,7 @@
           <ScalarProperty Name="Salary" ColumnName="Salary" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Id_account" ColumnName="Id_account" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -63,6 +64,7 @@
           <ScalarProperty Name="Surname" ColumnName="Surname" />
           <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
           <ScalarProperty Name="Post" ColumnName="Post" />
+          <ScalarProperty Name="Id_account" ColumnName="Id_account" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -8,7 +8,7 @@ namespace Banking_system.Models
 {
     public  class User
     {
-        [Required]
+        [Required(ErrorMessage = "Неверный login")]
         public string Username { get; set; }
         [Required]
         [DataType(DataType.Password)]

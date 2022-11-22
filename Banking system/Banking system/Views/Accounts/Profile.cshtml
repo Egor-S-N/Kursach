@@ -1,0 +1,116 @@
+﻿@using Banking_system.Models
+
+@{
+    List<Credits> credits = ViewData["credits"] as List<Credits>;
+    Clients clients = ViewData["client"] as Clients;
+    Workers workers = ViewData["worker"] as Workers;
+    int id = 1;
+
+}
+<title>Личный профиль</title>
+<div>
+
+    @{
+        if ((string)Session["Usertype"] == "Admin")
+        {
+            <dt>
+                Фамилия: @Html.DisplayName(workers.Name)
+            </dt>
+
+
+            <dt>
+                Имя:  @Html.DisplayName(workers.Surname)
+            </dt>
+
+
+
+            <dt>
+                Отчество: @Html.DisplayName(workers.Patronymic)
+            </dt>
+
+
+
+            <dt>
+                Должность: @Html.DisplayName(workers.Post)
+            </dt>
+
+
+
+
+        }
+        else if ((string)Session["Usertype"] == "Client")
+        {
+            <dt>
+                Фамилия: @Html.DisplayName(clients.Name)
+            </dt>
+
+
+            <dt>
+                Имя:  @Html.DisplayName(clients.Surname)
+            </dt>
+
+
+
+            <dt>
+                Отчество: @Html.DisplayName(clients.Patronymic)
+            </dt>
+
+
+
+            <dt>
+                Зарплата: @Html.DisplayName(clients.Salary.ToString("C"))
+            </dt>
+
+
+
+            <dt>
+                Номер телефона: +@Html.DisplayName(clients.Phone)
+            </dt>
+
+
+
+
+
+            <dd>
+                @{ byte[] photo = clients.Photo;
+                    string imageSrc = null;
+                    if (photo != null)
+                    {
+                        MemoryStream ms = new MemoryStream();
+                        ms.Write(photo, 0, photo.Length);
+                        string imageBase64 = Convert.ToBase64String(ms.ToArray());
+                        imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                        string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+                    }
+                }
+
+                Фотография: <img src="@imageSrc" alt="Image" width="150" height="100" />
+
+            </dd>
+
+            <h2 style="text-align:center">Ваши кредиты</h2>
+
+            <table class="table">
+                <tr>
+                    <th>Сумма </th>
+                    <th>Дата выдачи </th>
+                </tr>
+                
+                @foreach(var item in credits)
+                {
+                    <tr>
+                        <td>
+                            @item.Credit_sum.ToString("C")
+                        </td>
+                        <td>
+                            @item.Date_of_issue.ToString("dd/MM/yyyy")
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+
+                }
+                }
+        </div>

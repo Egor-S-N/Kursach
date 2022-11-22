@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Banking_system.Models.Requests>
+@using Banking_system.Models
+@using System.Linq
+
+@{
+    ViewBag.Title = "Index";
+}
+<title>Заявки</title>
+<h2>Заявки</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    if ((string)Session["Usertype"] == "Client")
+                {
+                    @Html.ActionLink("Добавить новую заявку на кредит", "Create");
+                }
+}
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayName("Тип кредита")
+        </th>
+        @{
+            if ((string)Session["Usertype"] == "Admin" || (string)Session["Usertype"] == "Manager")
+            {
+                <th>
+                    @Html.DisplayName("ФИО клиента")
+                </th>
+            }
+        }
+
+        <th>
+            @Html.DisplayName("Статус")
+        </th>
+        <th>
+            @Html.DisplayName("Действия")
+        </th>
+
+
+
+
+    </tr>
+   
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    BankDBEntities db = new BankDBEntities();
+                    var ct = (from s in db.CreditTypes where s.Id == item.Id_credit_type select s).First();
+                    var client = (from s in db.Clients where s.Id == item.Id_client select s).First();
+
+                }
+                @ct.Name
+            </td>
+
+
+
+            @{
+                if ((string)Session["Usertype"] == "Admin" || (string)Session["Usertype"] == "Manager")
+                {
+
+                    <td>
+                        @client.Name @client.Surname @client.Patronymic
+                    </td>
+                }
+            }
+
+
+
+
+
+
+
+            @if (item.Result == true)
+            {
+                <td>Одобрено</td>
+            }
+            else
+            {
+                <td>Не одобрено</td>
+            }
+
+
+            @{
+
+
+                if ((string)Session["Usertype"] == "Admin")
+                {
+                    <td>
+                        @Html.ActionLink("Детали", "Details", new { id = item.Id })|
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                    </td>
+                }
+                else if ((string)Session["Usertype"] == "Client")
+                {
+                    <td>@Html.ActionLink("Детали", "Details", new { id = item.Id })</td>
+                }
+                else if ((string)Session["Usertype"] == "Manager")
+                {
+                    if (item.Result == true)
+                    {
+                     <td>@Html.ActionLink("Детали", "Details", new { id = item.Id })</td>
+                    }
+                    else
+                    {
+                    <td>@Html.ActionLink("Детали", "Details", new { id = item.Id })|
+                @Html.ActionLink("Одобрить", "Approve", new { id = item.Id })</td>
+
+                    }
+                }
+            }
+
+        </tr>
+
+
+    }
+
+
+</table>
+

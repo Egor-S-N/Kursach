@@ -25,6 +25,7 @@
           <Property Name="Salary" Type="int" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Photo" Type="image" Nullable="false" />
+          <Property Name="Id_account" Type="int" />
         </EntityType>
         <EntityType Name="Credits">
           <Key>
@@ -63,7 +64,20 @@
           <Property Name="Surname" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Post" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Id_account" Type="int" />
         </EntityType>
+        <Association Name="FK__Clients__Id_acco__19AACF41">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="Id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Credits__Id_requ__02C769E9">
           <End Role="Requests" Type="Self.Requests" Multiplicity="1" />
           <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
@@ -112,6 +126,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Workers__Id_acco__2CBDA3B5">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище BankDBModelContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
@@ -119,6 +145,10 @@
           <EntitySet Name="CreditTypes" EntityType="Self.CreditTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Clients__Id_acco__19AACF41" Association="Self.FK__Clients__Id_acco__19AACF41">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
           <AssociationSet Name="FK__Credits__Id_requ__02C769E9" Association="Self.FK__Credits__Id_requ__02C769E9">
             <End Role="Requests" EntitySet="Requests" />
             <End Role="Credits" EntitySet="Credits" />
@@ -135,6 +165,10 @@
             <End Role="CreditTypes" EntitySet="CreditTypes" />
             <End Role="Requests" EntitySet="Requests" />
           </AssociationSet>
+          <AssociationSet Name="FK__Workers__Id_acco__2CBDA3B5" Association="Self.FK__Workers__Id_acco__2CBDA3B5">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -149,6 +183,8 @@
           <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pasword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="accout_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Clients__Id_acco__19AACF41" FromRole="Accounts" ToRole="Clients" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK__Workers__Id_acco__2CBDA3B5" FromRole="Accounts" ToRole="Workers" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -161,6 +197,8 @@
           <Property Name="Salary" Type="Int32" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Id_account" Type="Int32" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Clients__Id_acco__19AACF41" FromRole="Clients" ToRole="Accounts" />
           <NavigationProperty Name="Requests" Relationship="Self.FK__Requests__Id_cli__7EF6D905" FromRole="Clients" ToRole="Requests" />
         </EntityType>
         <EntityType Name="Credits">
@@ -206,8 +244,34 @@
           <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Post" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_account" Type="Int32" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Workers__Id_acco__2CBDA3B5" FromRole="Workers" ToRole="Accounts" />
           <NavigationProperty Name="Credits" Relationship="Self.FK__Credits__Id_work__01D345B0" FromRole="Workers" ToRole="Credits" />
         </EntityType>
+        <Association Name="FK__Clients__Id_acco__19AACF41">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="Id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Workers__Id_acco__2CBDA3B5">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Requests__Id_cli__7EF6D905">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
@@ -263,6 +327,14 @@
           <EntitySet Name="CreditTypes" EntityType="Self.CreditTypes" />
           <EntitySet Name="Requests" EntityType="Self.Requests" />
           <EntitySet Name="Workers" EntityType="Self.Workers" />
+          <AssociationSet Name="FK__Clients__Id_acco__19AACF41" Association="Self.FK__Clients__Id_acco__19AACF41">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Workers__Id_acco__2CBDA3B5" Association="Self.FK__Workers__Id_acco__2CBDA3B5">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
           <AssociationSet Name="FK__Requests__Id_cli__7EF6D905" Association="Self.FK__Requests__Id_cli__7EF6D905">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Requests" EntitySet="Requests" />
@@ -306,6 +378,7 @@
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Id_account" ColumnName="Id_account" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -348,6 +421,7 @@
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
                 <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="Id_account" ColumnName="Id_account" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -25,7 +25,9 @@ namespace Banking_system.Models
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public string Post { get; set; }
+        public Nullable<int> Id_account { get; set; }
     
+        public virtual Accounts Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Credits> Credits { get; set; }
     }

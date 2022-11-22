@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Banking_system.Models.CreditTypes>
+
+@{
+    ViewBag.Title = "Index";
+}
+<title>Виды кредитов</title>
+<h2>Виды кредитов</h2>
+
+@if ((string)Session["Usertype"] == "Admin")
+            {
+                <p>
+                    @Html.ActionLink("Добавить новый", "Create")
+                </p>
+            }
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Навзание")
+        </th>
+        <th>
+            @Html.DisplayName("Проценты")
+        </th>
+        <th>
+            @Html.DisplayName("Период (в месяцах)")
+        </th>
+        @if ((string)Session["Usertype"] == "Admin")
+        {
+        <th>
+            @Html.DisplayName("Действия")
+        </th>
+
+        }
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Percent) %
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MonthPeriod)
+        </td>
+
+        @if ((string)Session["Usertype"] == "Admin")
+        {
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        }
+       
+
+    </tr>
+}
+
+</table>

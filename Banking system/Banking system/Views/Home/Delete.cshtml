@@ -1,0 +1,56 @@
+﻿@model Banking_system.Models.Requests
+@using Banking_system.Models
+
+@{
+    ViewBag.Title = "Delete";
+    CreditTypes creditTypes = ViewData["credittype"] as CreditTypes;
+    Clients clients = ViewData["clients"] as Clients;
+
+
+}
+<title>Удаление заявки</title>
+<h2>Удаление</h2>
+
+<h3>Уверены, что хотите удалить?</h3>
+<div>
+    <h4>Requests</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Тип кредита:
+        </dt>
+
+        <dd>
+            @creditTypes.Name
+        </dd>
+
+
+
+        <dt>
+            ФИО:
+        </dt>
+
+        <dd>
+            @clients.Name @clients.Surname @clients.Patronymic
+        </dd>
+
+        <dt>
+            Статус:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

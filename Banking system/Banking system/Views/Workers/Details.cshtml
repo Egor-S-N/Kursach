@@ -1,0 +1,59 @@
+﻿@model Banking_system.Models.Workers
+@using Banking_system.Models
+@{
+    ViewBag.Title = "Details";
+    var account = ViewData["account"] as Accounts;
+}
+<title>Детали</title>
+<h2>Детали</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Фамилия")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Имя")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Отчество")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Должность")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Post)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Данные аккаунта")
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.Id_account)*@
+            Login: @account.username Password: @account.pasword
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

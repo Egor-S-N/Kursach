@@ -27,7 +27,9 @@ namespace Banking_system.Models
         public int Salary { get; set; }
         public string Phone { get; set; }
         public byte[] Photo { get; set; }
+        public Nullable<int> Id_account { get; set; }
     
+        public virtual Accounts Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Requests> Requests { get; set; }
     }

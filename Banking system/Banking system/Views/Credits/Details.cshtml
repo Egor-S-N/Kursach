@@ -1,0 +1,68 @@
+﻿@model Banking_system.Models.Credits
+@using Banking_system.Models
+
+@{
+    ViewBag.Title = "Details";
+    Workers worker = ViewData["worker"] as Workers;
+    Clients client= ViewData["client"] as Clients;
+    Requests request= ViewData["request"] as Requests;
+    CreditTypes creditType= ViewData["credit_type"] as CreditTypes;
+    Credits credit = ViewData["credit"] as Credits;
+}
+<title>Детали кредита</title>
+<h2>Детали</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayName("Сотрудник: ")
+        </dt>
+        <dd>
+            @worker.Name @worker.Surname @worker.Patronymic
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Клиент: ")
+        </dt>
+        <dd>
+            @client.Name @client.Surname @client.Patronymic
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Кредит: ")
+        </dt>
+        <dd>
+            @creditType.Name  Под @creditType.Percent%
+        </dd>
+
+
+
+
+
+
+
+        
+
+        <dt>
+            @Html.DisplayName("Сумма кредита:")
+        </dt>
+
+        <dd>
+            @credit.Credit_sum.ToString("C")
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Дата выдачи:")
+        </dt>
+
+        <dd>
+            @credit.Date_of_issue.ToString("dd/MM/yyyy")
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

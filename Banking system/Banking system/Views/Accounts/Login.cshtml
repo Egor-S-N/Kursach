@@ -7,7 +7,9 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <title>Авторизация</title>
 </head>
+
 <style>
     .inputs{
         background-color:#224957;
@@ -21,45 +23,56 @@
         background-color: #20DF7F;
         width: 23%;
         border-radius: 12px;
-    }
+    }   
 </style>
-<body style="background-image: url('/Images/bg.jpg'); background-size:100% 175%  ; background-repeat: no-repeat; ">
+<body style="background-image: url('/Images/bg.png'); background-size:100% 760px;   background-repeat: no-repeat; ">
     <h2 style="text-align:center; margin-top:60px; color:#224957; font-weight: bolder;font-size: 25pt;">@ViewBag.Title</h2>
 
-    @{
-        try
-        {
-            if (TempData["msg"] != null)
-            {
-                @*<label style="color:red">@TempData["msg"]</label>*@
 
-            }
-        }
-        catch
-        {
-
-        }
-    }
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group control-label" style="margin-left: 33%; " >
+        <div class="form-group control-label" style="margin-left: 33%; ">
             @*@Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label " })*@
             <div class="col-md-10" style="margin-bottom:20px">
                 @Html.TextBoxFor(m => m.Username, new { @class = "form-control inputs" })
-                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                @{
+                    if (TempData["msg"] != null)
+                    {
+                        @Html.ValidationMessageFor(m => m.Username, "Неверный login", new { @class = "text-danger" })
+
+                    }
+                }
+
             </div>
         </div>
-        <div class="form-group "style="margin-left: 33%;">
+        <div class="form-group " style="margin-left: 33%;">
             @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })*@
             <div class="col-md-10" style="margin-bottom:20px">
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control inputs" })
-                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                @{
+                    if (TempData["msg"] != null)
+                    {
+                        @Html.ValidationMessageFor(m => m.Password, "Неверный пароль", new { @class = "text-danger" })
+
+                    }
+                }
             </div>
         </div>
 
-        <div class="form-group"style="margin-left:20%;">
+        @*<div class="form-group " style="margin-left: 33%;">
+            <div class="col-md-10" style="margin-bottom:20px">
+                @{
+                    if (TempData["msg"] != null)
+                    {
+                        @Html.ValidationMessage("Username", "Неверный логин или пароль", new { @class = "text-danger" })
+                    }
+                }
+                </div>
+            </div>*@
+
+        <div class="form-group" style="margin-left:20%;">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Войти" class="btn btn-default buttons" />
                 @*@Html.ActionLink("Зарегестрироваться", "Register")*@
@@ -67,7 +80,15 @@
             </div>
         </div>
         <p>
+@*<script>
+    function myalert() {
+        alert("Вы пытаетесь войти");
+    }
+</script>*@
         </p>
+       
+
+        
     }
 
 </body>

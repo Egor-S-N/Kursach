@@ -9,7 +9,7 @@
         {
             if (Session["Userid"] != null)
             {
-                <li>@Html.ActionLink($"{Session["Userid"]}", "Login", "Accounts", routeValues: null, htmlAttributes: new { id = "ProfileLink" })</li>
+                <li>@Html.ActionLink($"{Session["UserSurname"]}", "Profile", "Accounts", routeValues: null, htmlAttributes: new { id = "ProfileLink" })</li>
                 <li>@Html.ActionLink("Выйти", "Logout", "Accounts", routeValues: null, htmlAttributes: new { id = "logoutLink" })</li>
             }
             else
